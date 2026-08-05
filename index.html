@@ -18,7 +18,6 @@
     <!-- Alpine.js for interactive state management -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-    <!-- Tailwind Configuration for Corporate Trust Style -->
     <script>
         tailwind.config = {
             theme: {
@@ -112,7 +111,6 @@
 </head>
 <body class="antialiased selection:bg-brand-500 selection:text-white" x-data="appState()">
 
-    <!-- Navigation Header -->
     <header class="sticky top-0 z-50 glass-panel border-b border-slate-200/80 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             
@@ -129,22 +127,27 @@
                 </div>
             </a>
 
-            <!-- Desktop Navigation -->
-            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
-                <a href="#features" class="hover:text-brand-600 transition-colors">امکانات اصلی</a>
-                <a href="#screenshots" class="hover:text-brand-600 transition-colors">محیط نرم‌افزار</a>
-                <a href="#benefits" class="hover:text-brand-600 transition-colors">مزایا</a>
-                <a href="#faq" class="hover:text-brand-600 transition-colors">سوالات متداول</a>
-                <a href="#contact" class="hover:text-brand-600 transition-colors">ارتباط با ما</a>
-            </nav>
+            <!-- Action CTA Buttons & Hamburger Menu -->
+            <div class="flex items-center gap-2.5 sm:gap-3">
+                <!-- دکمه خرید اشتراک شیشه‌ای و جذاب (Glassmorphic Button) -->
+                <a href="plans.html" 
+                   title="خرید و مشاهده پلن‌های اشتراک"
+                   class="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-extrabold text-amber-950 bg-amber-400/25 hover:bg-amber-400/40 border border-amber-400/60 backdrop-blur-md rounded-full transition-all duration-300 shadow-sm hover:shadow-amber-400/30 hover:-translate-y-0.5 active:translate-y-0 group">
+                    <span class="relative flex h-2.5 w-2.5">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500"></span>
+                    </span>
+                    <svg class="w-4 h-4 text-amber-800 group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <span>خرید اشتراک</span>
+                </a>
 
-            <!-- Action CTA -->
-            <div class="flex items-center gap-3">
                 <!-- دکمه ورود به کانال تلگرام -->
                 <a href="https://t.me/melkup_app" 
                    target="_blank" 
                    title="کانال تلگرام ملک‌آپ"
-                   class="hidden xl:inline-flex items-center gap-2 px-4 py-2.5 text-xs font-bold text-sky-600 bg-sky-50 hover:bg-sky-100 border border-sky-200/80 rounded-full transition-all duration-300 hover:shadow-sm">
+                   class="hidden xl:inline-flex items-center gap-2 px-4 py-2.5 text-xs font-bold text-sky-600 bg-sky-50/80 hover:bg-sky-100 border border-sky-200/80 rounded-full transition-all duration-300 hover:shadow-sm">
                     <svg class="w-4 h-4 text-sky-500" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.38-.49 1.07-.75 4.19-1.82 6.98-3.02 8.38-3.6 3.99-1.65 4.82-1.94 5.36-1.95.12 0 .38.03.55.17.14.12.18.28.2.45-.02.07-.02.16-.04.28z"/>
                     </svg>
@@ -155,60 +158,66 @@
                 <a href="excel_output.html" 
                    target="_blank" 
                    title="سامانه آنلاین تبدیل فایل به اکسل"
-                   class="hidden lg:inline-flex items-center gap-2 px-4 py-2.5 text-xs font-bold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200/80 rounded-full transition-all duration-300 hover:shadow-sm">
+                   class="hidden lg:inline-flex items-center gap-2 px-4 py-2.5 text-xs font-bold text-emerald-700 bg-emerald-50/80 hover:bg-emerald-100 border border-emerald-200/80 rounded-full transition-all duration-300 hover:shadow-sm">
                     <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                     </svg>
                     <span>تبدیل فایل‌ها به اکسل</span>
                 </a>
 
+                <!-- دکمه دانلود APK -->
                 <a href="https://github.com/MostafaModaberi/melkup-releases/releases/download/v1.0.6/MelkUp.-.v1.0.6.apk" 
                    target="_blank" 
                    download="MelkUp.v1.0.6.apk"
-                   class="relative inline-flex items-center justify-center px-5 py-2.5 text-sm font-bold text-white transition-all duration-300 bg-gradient-to-r from-brand-600 to-violetBrand-600 rounded-full shadow-md hover:shadow-soft-indigo hover:-translate-y-0.5 active:translate-y-0 overflow-hidden group">
+                   class="relative inline-flex items-center justify-center px-4 sm:px-5 py-2.5 text-xs sm:text-sm font-bold text-white transition-all duration-300 bg-gradient-to-r from-brand-600 to-violetBrand-600 rounded-full shadow-md hover:shadow-soft-indigo hover:-translate-y-0.5 active:translate-y-0 overflow-hidden group">
                     <span class="absolute inset-0 w-full h-full bg-white/20 group-hover:opacity-0 transition-opacity"></span>
-                    <svg class="w-4 h-4 ml-2 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-4 h-4 ml-1.5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                     </svg>
-                    دانلود مستقیم APK
+                    <span>دانلود APK</span>
                 </a>
                 
-                <!-- Mobile Menu Toggle Button -->
-                <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden p-2 text-slate-600 hover:text-brand-600 rounded-lg">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" x-show="!mobileMenuOpen">
+                <!-- Hamburger Menu Button (visible on all screens to simplify header) -->
+                <button @click="mobileMenuOpen = !mobileMenuOpen" 
+                        class="p-2.5 text-slate-700 hover:text-brand-600 bg-slate-100/80 hover:bg-slate-200/80 backdrop-blur-md border border-slate-200/80 rounded-full transition-all flex items-center justify-center gap-1.5"
+                        title="منوی دسترسی">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" x-show="!mobileMenuOpen">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" x-show="mobileMenuOpen" x-cloak>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" x-show="mobileMenuOpen" x-cloak>
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
                 </button>
             </div>
         </div>
 
-        <!-- Mobile Menu Nav -->
-        <div x-show="mobileMenuOpen" x-transition x-cloak class="md:hidden glass-panel border-b border-slate-200 px-4 pt-2 pb-6 space-y-3">
-            <a href="#features" @click="mobileMenuOpen = false" class="block py-2 text-slate-700 font-medium hover:text-brand-600">امکانات اصلی</a>
-            <a href="#screenshots" @click="mobileMenuOpen = false" class="block py-2 text-slate-700 font-medium hover:text-brand-600">محیط نرم‌افزار</a>
-            <a href="#benefits" @click="mobileMenuOpen = false" class="block py-2 text-slate-700 font-medium hover:text-brand-600">مزایا</a>
-            <a href="#faq" @click="mobileMenuOpen = false" class="block py-2 text-slate-700 font-medium hover:text-brand-600">سوالات متداول</a>
-            <a href="#contact" @click="mobileMenuOpen = false" class="block py-2 text-slate-700 font-medium hover:text-brand-600">ارتباط با ما</a>
-            <div class="pt-2 border-t border-slate-200 flex flex-col gap-2">
-                <!-- دکمه اکسل  در منوی موبایل -->
-                <!-- لینک سایت تبدیل فایل به اکسل را در href زیر قرار دهید -->
-                <a href="excel_output.html" target="_blank" class="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-emerald-50 text-emerald-700 font-semibold text-sm border border-emerald-200">
-                    <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+        <!-- Hamburger Dropdown Menu (Contains navigation links) -->
+        <div x-show="mobileMenuOpen" x-transition x-cloak class="glass-panel border-b border-slate-200 px-6 pt-4 pb-6 space-y-4 shadow-xl">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-3 pt-2">
+                <a href="#features" @click="mobileMenuOpen = false" class="px-4 py-2.5 rounded-xl bg-slate-50 hover:bg-brand-50 text-slate-700 hover:text-brand-600 font-semibold text-sm text-center border border-slate-100 transition-colors">امکانات اصلی</a>
+                <a href="#screenshots" @click="mobileMenuOpen = false" class="px-4 py-2.5 rounded-xl bg-slate-50 hover:bg-brand-50 text-slate-700 hover:text-brand-600 font-semibold text-sm text-center border border-slate-100 transition-colors">محیط نرم‌افزار</a>
+                <a href="#benefits" @click="mobileMenuOpen = false" class="px-4 py-2.5 rounded-xl bg-slate-50 hover:bg-brand-50 text-slate-700 hover:text-brand-600 font-semibold text-sm text-center border border-slate-100 transition-colors">مزایا</a>
+                <a href="#faq" @click="mobileMenuOpen = false" class="px-4 py-2.5 rounded-xl bg-slate-50 hover:bg-brand-50 text-slate-700 hover:text-brand-600 font-semibold text-sm text-center border border-slate-100 transition-colors">سوالات متداول</a>
+                <a href="#contact" @click="mobileMenuOpen = false" class="px-4 py-2.5 rounded-xl bg-slate-50 hover:bg-brand-50 text-slate-700 hover:text-brand-600 font-semibold text-sm text-center border border-slate-100 transition-colors">ارتباط با ما</a>
+            </div>
+
+            <div class="pt-3 border-t border-slate-200/80 flex flex-wrap gap-2 lg:hidden">
+                <a href="plans.html" class="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-amber-400 text-amber-950 font-bold text-xs">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
-                    تبدیل فایل‌های برنامه به اکسل
+                    خرید اشتراک (plans.html)
                 </a>
-                <a href="https://t.me/melkup_app" target="_blank" class="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-sky-50 text-sky-600 font-semibold text-sm">
-                    کانال تلگرام ملک‌آپ
+                <a href="excel_output.html" target="_blank" class="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-emerald-50 text-emerald-700 font-semibold text-xs border border-emerald-200">
+                    تبدیل به اکسل
+                </a>
+                <a href="https://t.me/melkup_app" target="_blank" class="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-sky-50 text-sky-600 font-semibold text-xs border border-sky-100">
+                    کانال تلگرام
                 </a>
             </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="relative pt-10 pb-16 md:pt-16 md:pb-28 overflow-hidden">
         <!-- Background Ambient Blobs -->
         <div class="absolute top-1/4 right-10 w-96 h-96 bg-brand-500/15 rounded-full blur-3xl pointer-events-none animate-pulse-slow"></div>
@@ -255,8 +264,6 @@
                             </div>
                         </a>
 
-                        <!-- دکمه سامانه تبدیل فایل به اکسل -->
-                        <!-- لینک سایت تبدیل فایل به اکسل را در href زیر قرار دهید -->
                         <a href="excel_output.html" 
                            target="_blank" 
                            class="w-full sm:w-auto px-6 py-4 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 flex items-center justify-center gap-3 group">
@@ -288,7 +295,6 @@
 
                 </div>
 
-                <!-- Left Column: Redesigned Single Image Hero Showcase with Floating Buttons -->
                 <div class="lg:col-span-5 flex justify-center relative">
                     
                     <!-- Decorative Background Aura -->
@@ -344,7 +350,6 @@
         </div>
     </section>
 
-    <!-- Features & Capabilities Section -->
     <section id="features" class="py-20 bg-white relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
@@ -447,7 +452,6 @@
         </div>
     </section>
 
-    <!-- App Screenshots Gallery Section -->
     <section id="screenshots" class="py-20 bg-slate-900 text-white relative overflow-hidden">
         
         <!-- Ambient Lighting -->
@@ -517,7 +521,6 @@
         </div>
     </section>
 
-    <!-- Lightbox Modal -->
     <div x-show="lightboxOpen" x-transition.opacity x-cloak class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-4">
         <button @click="lightboxOpen = false" class="absolute top-6 right-6 text-slate-400 hover:text-white text-3xl font-bold z-50 p-2">
             &times;
@@ -538,7 +541,6 @@
         </div>
     </div>
 
-    <!-- Interactive Feature Spotlight -->
     <section id="benefits" class="py-20 bg-slate-50 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="glass-panel rounded-3xl p-8 sm:p-12 border border-slate-200 shadow-soft-indigo">
@@ -600,7 +602,6 @@
         </div>
     </section>
 
-    <!-- Final Download Banner & QR Code -->
     <section class="py-16 bg-gradient-to-br from-brand-900 via-indigo-950 to-slate-950 text-white relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
@@ -613,13 +614,19 @@
                         همین حالا اپلیکیشن ملک‌آپ را دانلود کنید و فایل‌های ملکی خود را هوشمندانه و با بالاترین نظم مدیریت کنید.
                     </p>
                     <div class="pt-4 flex flex-wrap items-center justify-center md:justify-start gap-4">
+                        <a href="plans.html" 
+                           class="px-8 py-4 rounded-2xl bg-amber-400 hover:bg-amber-300 text-amber-950 font-black text-base shadow-lg hover:shadow-amber-400/20 hover:-translate-y-1 transition-all duration-300 flex items-center gap-2">
+                            <svg class="w-5 h-5 text-amber-950" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span>خرید اشتراک</span>
+                        </a>
                         <a href="https://github.com/MostafaModaberi/melkup-releases/releases/download/v1.0.6/MelkUp.-.v1.0.6.apk" 
                            target="_blank" 
                            download="MelkUp.v1.0.6.apk" 
                            class="px-8 py-4 rounded-2xl bg-gradient-to-r from-brand-500 to-violetBrand-600 text-white font-black text-base shadow-lg hover:shadow-glow-indigo hover:-translate-y-1 transition-all duration-300">
                             دانلود مستقیم برنامه (v1.0.6)
                         </a>
-                        <!-- لینک سایت تبدیل فایل به اکسل را در href زیر قرار دهید -->
                         <a href="excel_output.html" target="_blank" class="px-6 py-4 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md transition-all flex items-center gap-2">
                             <svg class="w-5 h-5 text-emerald-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
@@ -647,7 +654,6 @@
         </div>
     </section>
 
-    <!-- FAQ Section -->
     <section id="faq" class="py-20 bg-white">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             
@@ -672,7 +678,6 @@
         </div>
     </section>
 
-    <!-- Contact & Footer -->
     <footer id="contact" class="bg-slate-900 text-slate-400 py-16 border-t border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-slate-800">
@@ -727,7 +732,6 @@
         </div>
     </footer>
 
-    <!-- Alpine JS Logic -->
     <script>
         function appState() {
             return {
