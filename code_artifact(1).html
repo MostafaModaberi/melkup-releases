@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ملک‌آپ | دستیار هوشمند و حرفه‌ای مشاوران املاک</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="https://i.ibb.co/tV4bpP1/icon.jpg">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Shabnam Persian Font -->
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/shabnam-font@v5.0.2/dist/font-face.css" rel="stylesheet" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/shabnam-font/5.0.1/font-face.min.css" rel="stylesheet" type="text/css">
+    
+    <!-- Alpine.js for interactive state management -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- Tailwind Configuration for Corporate Trust Style -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Shabnam', 'Vazirmatn', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#EEF2FF',
+                            100: '#E0E7FF',
+                            200: '#C7D2FE',
+                            500: '#6366F1',
+                            600: '#4F46E5', // Primary Indigo
+                            700: '#4338CA',
+                            800: '#3730A3',
+                            900: '#312E81',
+                        },
+                        violetBrand: {
+                            500: '#8B5CF6',
+                            600: '#7C3AED', // Secondary Violet
+                            700: '#6D28D9',
+                        }
+                    },
+                    boxShadow: {
+                        'soft-indigo': '0 10px 30px -5px rgba(79, 70, 229, 0.15), 0 8px 10px -6px rgba(79, 70, 229, 0.1)',
+                        'glow-indigo': '0 0 25px rgba(79, 70, 229, 0.35)',
+                        'card-hover': '0 20px 35px -10px rgba(79, 70, 229, 0.2)',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delayed': 'float 6s ease-in-out 3s infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-12px) rotate(1deg)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Shabnam', 'Vazirmatn', sans-serif;
+            background-color: #F8FAFC;
+            color: #0F172A;
+            overflow-x: hidden;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F1F5F9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #A5B4FC;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6366F1;
+        }
+
+        /* Glassmorphism helpers */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(241, 245, 249, 1);
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-500 selection:text-white" x-data="appState()">
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-50 glass-panel border-b border-slate-200/80 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Logo & Brand Name -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="relative w-12 h-12 rounded-2xl overflow-hidden p-1 group-hover:scale-105 transition-transform duration-300">
+                    <img src="https://i.ibb.co/8Lm8KC1W/Asset-3object.png" alt="لوگو ملک‌آپ" class="w-full h-full object-contain">
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-brand-600 to-violetBrand-600 tracking-tight">
+                        ملک‌آپ
+                    </span>
+                    <span class="text-[10px] font-semibold text-slate-500 -mt-1">دستیار مشاوران املاک</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
+                <a href="#features" class="hover:text-brand-600 transition-colors">امکانات اصلی</a>
+                <a href="#screenshots" class="hover:text-brand-600 transition-colors">محیط نرم‌افزار</a>
+                <a href="#benefits" class="hover:text-brand-600 transition-colors">مزایا</a>
+                <a href="#faq" class="hover:text-brand-600 transition-colors">سوالات متداول</a>
+                <a href="#contact" class="hover:text-brand-600 transition-colors">ارتباط با ما</a>
+            </nav>
+
+            <!-- Action CTA -->
+            <div class="flex items-center gap-3">
+                <!-- دکمه ورود به کانال تلگرام -->
+                <a href="https://t.me/melkup_app" 
+                   target="_blank" 
+                   title="کانال تلگرام ملک‌آپ"
+                   class="hidden xl:inline-flex items-center gap-2 px-4 py-2.5 text-xs font-bold text-sky-600 bg-sky-50 hover:bg-sky-100 border border-sky-200/80 rounded-full transition-all duration-300 hover:shadow-sm">
+                    <svg class="w-4 h-4 text-sky-500" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.38-.49 1.07-.75 4.19-1.82 6.98-3.02 8.38-3.6 3.99-1.65 4.82-1.94 5.36-1.95.12 0 .38.03.55.17.14.12.18.28.2.45-.02.07-.02.16-.04.28z"/>
+                    </svg>
+                    <span>کانال تلگرام</span>
+                </a>
+
+                <!-- دکمه ورود به سایت تبدیل فایل به اکسل -->
+                <a href="#" 
+                   target="_blank" 
+                   title="سامانه آنلاین تبدیل فایل به اکسل"
+                   class="hidden lg:inline-flex items-center gap-2 px-4 py-2.5 text-xs font-bold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200/80 rounded-full transition-all duration-300 hover:shadow-sm">
+                    <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                    <span>تبدیل فایل‌ها به اکسل</span>
+                </a>
+
+                <a href="https://github.com/MostafaModaberi/melkup-releases/releases/download/v1.0.6/MelkUp.-.v1.0.6.apk" 
+                   target="_blank" 
+                   download="MelkUp.v1.0.6.apk"
+                   class="relative inline-flex items-center justify-center px-5 py-2.5 text-sm font-bold text-white transition-all duration-300 bg-gradient-to-r from-brand-600 to-violetBrand-600 rounded-full shadow-md hover:shadow-soft-indigo hover:-translate-y-0.5 active:translate-y-0 overflow-hidden group">
+                    <span class="absolute inset-0 w-full h-full bg-white/20 group-hover:opacity-0 transition-opacity"></span>
+                    <svg class="w-4 h-4 ml-2 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                    </svg>
+                    دانلود مستقیم APK
+                </a>
+                
+                <!-- Mobile Menu Toggle Button -->
+                <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden p-2 text-slate-600 hover:text-brand-600 rounded-lg">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" x-show="!mobileMenuOpen">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" x-show="mobileMenuOpen" x-cloak>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Nav -->
+        <div x-show="mobileMenuOpen" x-transition x-cloak class="md:hidden glass-panel border-b border-slate-200 px-4 pt-2 pb-6 space-y-3">
+            <a href="#features" @click="mobileMenuOpen = false" class="block py-2 text-slate-700 font-medium hover:text-brand-600">امکانات اصلی</a>
+            <a href="#screenshots" @click="mobileMenuOpen = false" class="block py-2 text-slate-700 font-medium hover:text-brand-600">محیط نرم‌افزار</a>
+            <a href="#benefits" @click="mobileMenuOpen = false" class="block py-2 text-slate-700 font-medium hover:text-brand-600">مزایا</a>
+            <a href="#faq" @click="mobileMenuOpen = false" class="block py-2 text-slate-700 font-medium hover:text-brand-600">سوالات متداول</a>
+            <a href="#contact" @click="mobileMenuOpen = false" class="block py-2 text-slate-700 font-medium hover:text-brand-600">ارتباط با ما</a>
+            <div class="pt-2 border-t border-slate-200 flex flex-col gap-2">
+                <!-- دکمه اکسل در منوی موبایل -->
+                <!-- لینک سایت تبدیل فایل به اکسل را در href زیر قرار دهید -->
+                <a href="#" target="_blank" class="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-emerald-50 text-emerald-700 font-semibold text-sm border border-emerald-200">
+                    <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                    تبدیل فایل‌های برنامه به اکسل
+                </a>
+                <a href="https://t.me/melkup_app" target="_blank" class="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-sky-50 text-sky-600 font-semibold text-sm">
+                    کانال تلگرام ملک‌آپ
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-10 pb-16 md:pt-16 md:pb-28 overflow-hidden">
+        <!-- Background Ambient Blobs -->
+        <div class="absolute top-1/4 right-10 w-96 h-96 bg-brand-500/15 rounded-full blur-3xl pointer-events-none animate-pulse-slow"></div>
+        <div class="absolute top-1/3 left-10 w-80 h-80 bg-violetBrand-500/15 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-10 right-1/3 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+                
+                <!-- Right Column: Headlines & CTA -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-right">
+                    
+                    <!-- Developer Attribution Badge -->
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-50 border border-brand-200 text-brand-700 text-xs sm:text-sm font-semibold shadow-sm">
+                        <span class="w-2 h-2 rounded-full bg-brand-600"></span>
+                        <span>توسعه‌دهنده: مصطفی مدبری</span>
+                    </div>
+
+                    <!-- Main Headline -->
+                    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-[1.18] tracking-tight">
+                        ملک‌آپ ؛ دستیار هوشمند
+                        <span class="block mt-2 bg-clip-text text-transparent bg-gradient-to-r from-brand-600 via-violetBrand-600 to-indigo-800">
+                            مشاوران و آژانس‌های املاک
+                        </span>
+                    </h1>
+
+                    <!-- Paragraph Description -->
+                    <p class="text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0 font-normal">
+                        ملک‌آپ با هدف افزایش سرعت، دقت و نظم در مدیریت فایل‌های ملکی طراحی شده است. تمامی ابزارهای موردنیاز برای ثبت، جستجوی پیشرفته، تولید اتوماتیک متن آگهی و اشتراک‌گذاری سریع با مشتریان را در یک محیط ساده و حرفه‌ای بدون نیاز به اینترنت در اختیار داشته باشید.
+                    </p>
+
+                    <!-- CTAs & Action Buttons -->
+                    <div class="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 flex-wrap">
+                        <a href="https://github.com/MostafaModaberi/melkup-releases/releases/download/v1.0.6/MelkUp.-.v1.0.6.apk" 
+                           target="_blank" 
+                           download="MelkUp.v1.0.6.apk" 
+                           class="w-full sm:w-auto px-7 py-4 rounded-2xl bg-gradient-to-r from-brand-600 to-violetBrand-600 text-white font-bold text-base shadow-soft-indigo hover:shadow-card-hover hover:-translate-y-1 active:translate-y-0 transition-all duration-300 flex items-center justify-center gap-3 group">
+                            <svg class="w-6 h-6 text-white group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                            </svg>
+                            <div class="text-right">
+                                <div class="text-xs font-normal text-indigo-100">دانلود مستقیم فایل اندروید</div>
+                                <div class="text-sm font-extrabold">دانلود اپلیکیشن MelkUp</div>
+                            </div>
+                        </a>
+
+                        <!-- دکمه سامانه تبدیل فایل به اکسل -->
+                        <!-- لینک سایت تبدیل فایل به اکسل را در href زیر قرار دهید -->
+                        <a href="#" 
+                           target="_blank" 
+                           class="w-full sm:w-auto px-6 py-4 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 flex items-center justify-center gap-3 group">
+                            <svg class="w-6 h-6 text-emerald-100 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            <div class="text-right">
+                                <div class="text-[10px] font-normal text-emerald-100">سامانه آنلاین ابزارها</div>
+                                <div class="text-sm font-extrabold">تبدیل فایل‌ها به اکسل</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Trust Stats Bar -->
+                    <div class="pt-6 border-t border-slate-200/80 grid grid-cols-3 gap-4 text-center lg:text-right">
+                        <div>
+                            <div class="text-lg sm:text-2xl font-black text-slate-900">100% آفلاین</div>
+                            <div class="text-xs text-slate-500 font-medium mt-0.5">بدون نیاز به اینترنت</div>
+                        </div>
+                        <div>
+                            <div class="text-lg sm:text-2xl font-black text-slate-900">امن و خودکار</div>
+                            <div class="text-xs text-slate-500 font-medium mt-0.5">پشتیبان‌گیری از فایل‌ها</div>
+                        </div>
+                        <div>
+                            <div class="text-lg sm:text-2xl font-black text-slate-900">هوشمند</div>
+                            <div class="text-xs text-slate-500 font-medium mt-0.5">تولید متن آگهی صوتی/متنی</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Left Column: Redesigned Single Image Hero Showcase with Floating Buttons -->
+                <div class="lg:col-span-5 flex justify-center relative">
+                    
+                    <!-- Decorative Background Aura -->
+                    <div class="absolute inset-0 bg-gradient-to-tr from-brand-600/20 via-violetBrand-500/20 to-indigo-500/10 rounded-3xl filter blur-2xl transform scale-105"></div>
+
+                    <!-- Hero Image Box with Floating Elements -->
+                    <div class="relative z-10 w-full max-w-[320px] sm:max-w-[350px] group">
+                        
+                        <!-- Single Frame Screen Showcase with Inner Padding -->
+                        <div class="relative bg-white/90 backdrop-blur-md p-3.5 rounded-[36px] shadow-card-hover border border-slate-200/90 transition-all duration-500 hover:shadow-glow-indigo hover:-translate-y-1">
+                            <div class="relative rounded-[26px] overflow-hidden bg-slate-100 border border-slate-200/60 aspect-[9/18]">
+                                <img src="https://i.ibb.co/7JMXNHXh/01.jpg" 
+                                     alt="نمای اصلی اپلیکیشن ملک‌آپ" 
+                                     class="w-full h-full object-cover rounded-2xl shadow-sm transition-transform duration-500 group-hover:scale-105">
+                            </div>
+                        </div>
+
+                        <!-- Floating Badge 1 (Top Left) -->
+                        <div class="absolute -top-4 -left-6 p-3.5 rounded-2xl glass-card shadow-soft-indigo border border-white flex items-center gap-2.5 animate-float z-20">
+                            <div class="w-9 h-9 rounded-xl bg-brand-100 text-brand-600 flex items-center justify-center font-bold text-base shadow-inner">⚡</div>
+                            <div>
+                                <div class="text-xs font-extrabold text-slate-800">ثبت سریع و هوشمند</div>
+                                <div class="text-[10px] text-slate-500">مدیریت فایل در چند ثانیه</div>
+                            </div>
+                        </div>
+
+                        <!-- Floating Badge 2 (Bottom Left) -->
+                        <div class="absolute -bottom-4 -left-6 p-3.5 rounded-2xl glass-card shadow-soft-indigo border border-white flex items-center gap-2.5 animate-float-delayed z-20">
+                            <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-base shadow-inner">📊</div>
+                            <div>
+                                <div class="text-xs font-extrabold text-slate-800">خروجی شکیل و اکسل</div>
+                                <div class="text-[10px] text-slate-500">ارسال سریع به شبکه‌های اجتماعی</div>
+                            </div>
+                        </div>
+
+                        <!-- Floating Action Button (Right Edge) -->
+                        <a href="https://github.com/MostafaModaberi/melkup-releases/releases/download/v1.0.6/MelkUp.-.v1.0.6.apk"
+                           target="_blank"
+                           download="MelkUp.v1.0.6.apk"
+                           class="hidden sm:flex absolute top-1/2 -right-8 -translate-y-1/2 px-4 py-2.5 rounded-full bg-gradient-to-r from-brand-600 to-violetBrand-600 text-white text-xs font-bold shadow-lg hover:scale-105 hover:shadow-glow-indigo transition-all duration-300 items-center gap-2 border border-white/30 backdrop-blur-md z-20 group/btn">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                            <span>دانلود APK v1.0.6</span>
+                            <svg class="w-3.5 h-3.5 group-hover/btn:translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                            </svg>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Features & Capabilities Section -->
+    <section id="features" class="py-20 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                <span class="px-3.5 py-1.5 rounded-full bg-brand-50 text-brand-600 text-xs font-extrabold uppercase tracking-wider border border-brand-100">
+                    امکانات بی‌نظیر
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                    هر آنچه یک مشاور املاک حرفه‌ای نیاز دارد
+                </h2>
+                <p class="text-slate-600 text-base leading-relaxed">
+                    ملک‌آپ با حذف پیچیدگی‌های اضافه، تجربه‌ای روان و استاندارد را برای مدیریت کامل املاک خرید، فروش، رهن و اجاره فراهم می‌کند.
+                </p>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Feature 1 -->
+                <div class="glass-card p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-soft-indigo hover:-translate-y-1 transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-brand-600 group-hover:text-white transition-all duration-300">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">مدیریت همه‌جانبه فایل‌ها</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        ثبت و دسته‌بندی فایل‌های فروش، رهن کامل، اجاره کامل یا رهن و اجاره ترکیبی با ثبت مشخصات دقیق ملک.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="glass-card p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-soft-indigo hover:-translate-y-1 transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-violetBrand-50 text-violetBrand-600 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-violetBrand-600 group-hover:text-white transition-all duration-300">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">جستجو و فیلتر پیشرفته</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        جستجوی آنی بر اساس قیمت، میزان رهن و اجاره، متراژ زمین، زیربنا، تعداد اتاق، امکانات و نوع کاربری ملک.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="glass-card p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-soft-indigo hover:-translate-y-1 transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">تولید خودکار متن آگهی</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        ایجاد خودکار متون آگهی حرفه‌ای و آماده برای ارسال به صورت گروهی یا مجزا در کانال‌ها و شبکه‌های اجتماعی.
+                    </p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="glass-card p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-soft-indigo hover:-translate-y-1 transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-amber-600 group-hover:text-white transition-all duration-300">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">شخصی‌سازی کامل قالب‌ها</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        امکان تنظیم دقیق سربرگ، تهبرگ آگهی، جداکننده‌ها، ایموجی‌ها و شیوه نمایش قیمت‌ها مطابق سلیقه شما.
+                    </p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="glass-card p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-soft-indigo hover:-translate-y-1 transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-sky-50 text-sky-600 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-sky-600 group-hover:text-white transition-all duration-300">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">تماس سریع با مالکین</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        ثبت تصویر ملک و اطلاعات مالک جهت برقراری تماس تلفنی یا ارسال پیامک مستقیم و بدون اتلاف وقت.
+                    </p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="glass-card p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-soft-indigo hover:-translate-y-1 transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-rose-600 group-hover:text-white transition-all duration-300">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">پشتیبان‌گیری خودکار</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        پشتیبان‌گیری امن از تمامی فایل‌ها تا نگران از دست رفتن اطلاعات ارزشمند کسب‌وکار خود نباشید.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- App Screenshots Gallery Section -->
+    <section id="screenshots" class="py-20 bg-slate-900 text-white relative overflow-hidden">
+        
+        <!-- Ambient Lighting -->
+        <div class="absolute top-0 right-1/4 w-96 h-96 bg-brand-600/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 left-1/4 w-96 h-96 bg-violetBrand-600/20 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-14">
+                <span class="px-3.5 py-1.5 rounded-full bg-brand-500/20 text-brand-300 text-xs font-bold uppercase tracking-wider border border-brand-500/30">
+                    رابط کاربرپسند و بهینه
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                    تصاویر محیط نرم‌افزار ملک‌آپ
+                </h2>
+                <p class="text-slate-400 text-base">
+                    تصاویر به صورت خودکار تغییر می‌کنند؛ همچنین می‌توانید با کشیدن انگشت یا کلیک روی عکس‌ها آن‌ها را پیمایش کنید.
+                </p>
+            </div>
+
+            <!-- Horizontal Carousel with Touch & Auto-Play -->
+            <div class="relative" 
+                 @mouseenter="stopAutoPlay()" 
+                 @mouseleave="startAutoPlay()" 
+                 @touchstart="stopAutoPlay()" 
+                 @touchend="startAutoPlay()">
+                
+                <!-- Scroll Buttons -->
+                <button @click="prevScreenshot()" class="hidden md:flex absolute -right-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-slate-800/90 border border-slate-700 text-white items-center justify-center shadow-lg hover:bg-brand-600 transition-colors" title="تصویر قبلی">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </button>
+                <button @click="nextScreenshot()" class="hidden md:flex absolute -left-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-slate-800/90 border border-slate-700 text-white items-center justify-center shadow-lg hover:bg-brand-600 transition-colors" title="تصویر بعدی">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                </button>
+
+                <!-- Cards Container -->
+                <div id="screenshots-container" class="flex gap-6 overflow-x-auto pb-8 pt-4 snap-x snap-mandatory hide-scrollbar">
+                    <template x-for="(screen, index) in screenshots" :key="index">
+                        <div class="flex-none w-[240px] sm:w-[270px] snap-center group cursor-pointer" @click="openLightbox(index)">
+                            <div class="relative rounded-3xl overflow-hidden bg-slate-800 border-2 transition-all duration-300 shadow-xl group-hover:shadow-glow-indigo group-hover:-translate-y-2"
+                                 :class="currentScreenshotIndex === index ? 'border-brand-500 ring-2 ring-brand-500/50 scale-105' : 'border-slate-700/80 group-hover:border-brand-500'">
+                                <img :src="screen.url" :alt="screen.title" class="w-full aspect-[9/16] object-cover">
+                                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
+                                <div class="absolute bottom-4 right-4 left-4 flex items-center justify-between">
+                                    <span class="text-xs font-bold text-white bg-slate-900/80 px-3 py-1.5 rounded-full border border-slate-700/60" x-text="screen.title"></span>
+                                    <span class="w-8 h-8 rounded-full bg-brand-600/90 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                        🔍
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+
+                <!-- Carousel Dots Pagination -->
+                <div class="flex items-center justify-center gap-2 mt-4">
+                    <template x-for="(screen, index) in screenshots" :key="index">
+                        <button @click="scrollToIndex(index)" 
+                                :class="currentScreenshotIndex === index ? 'w-8 bg-brand-500' : 'w-2.5 bg-slate-700 hover:bg-slate-500'" 
+                                class="h-2.5 rounded-full transition-all duration-300"
+                                :title="screen.title"></button>
+                    </template>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div x-show="lightboxOpen" x-transition.opacity x-cloak class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-4">
+        <button @click="lightboxOpen = false" class="absolute top-6 right-6 text-slate-400 hover:text-white text-3xl font-bold z-50 p-2">
+            &times;
+        </button>
+        
+        <div class="relative max-w-sm sm:max-w-md w-full flex flex-col items-center">
+            <img :src="screenshots[lightboxIndex].url" :alt="screenshots[lightboxIndex].title" class="max-h-[80vh] rounded-3xl border-2 border-slate-700 shadow-2xl object-contain">
+            <div class="mt-4 text-center">
+                <h3 class="text-lg font-bold text-white" x-text="screenshots[lightboxIndex].title"></h3>
+                <p class="text-xs text-slate-400 mt-1" x-text="'تصویر ' + (lightboxIndex + 1) + ' از ' + screenshots.length"></p>
+            </div>
+            
+            <!-- Navigation in Lightbox -->
+            <div class="flex gap-4 mt-4">
+                <button @click="prevLightbox()" class="px-4 py-2 rounded-xl bg-slate-800 text-white hover:bg-brand-600 transition-colors text-sm font-semibold">قبلی</button>
+                <button @click="nextLightbox()" class="px-4 py-2 rounded-xl bg-slate-800 text-white hover:bg-brand-600 transition-colors text-sm font-semibold">بعدی</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Feature Spotlight -->
+    <section id="benefits" class="py-20 bg-slate-50 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-panel rounded-3xl p-8 sm:p-12 border border-slate-200 shadow-soft-indigo">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    
+                    <div class="lg:col-span-6 space-y-6">
+                        <span class="px-3.5 py-1 rounded-full bg-violetBrand-50 text-violetBrand-600 text-xs font-bold">
+                            ارسال آسان آگهی
+                        </span>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
+                            تولید و ارسال هوشمند متن آگهی در چنل‌های تلگرامی و روبیکا
+                        </h3>
+                        <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                            یکی از فرسایشی‌ترین کارهای مشاوران املاک، تایپ و فرمت‌بندی آگهی‌ها برای کانال‌های تلگرام و پیام‌رسان‌ها است. ملک‌آپ با یک کلیک، تمام مشخصات ملک را به قالبی شکیل و مرتب همراه با ایموجی‌ها و سربرگ اختصاصی شما تبدیل می‌کند.
+                        </p>
+
+                        <div class="space-y-3 pt-2">
+                            <div class="flex items-start gap-3">
+                                <div class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5">✓</div>
+                                <span class="text-sm font-medium text-slate-700">امکان تغییر جداکننده‌ها، ایموجی‌ها و نوع قیمت</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5">✓</div>
+                                <span class="text-sm font-medium text-slate-700">ارسال متون به صورت تک فایل یا فایل‌های انتخابی گروهی</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5">✓</div>
+                                <span class="text-sm font-medium text-slate-700">پشتیبانی کامل از املاک آپارتمان، ویلایی، باغ‌ویلا و تجاری</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Code / Text Preview Card -->
+                    <div class="lg:col-span-6 bg-slate-900 rounded-2xl p-6 text-slate-200 shadow-2xl relative">
+                        <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-800">
+                            <div class="flex items-center gap-2">
+                                <div class="w-3 h-3 rounded-full bg-rose-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-amber-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
+                            </div>
+                            <span class="text-xs text-slate-400 font-mono">پیش‌نمایش متن آگهی تولیدی</span>
+                        </div>
+                        <div class="font-mono text-xs leading-relaxed space-y-2 text-slate-300">
+                            <p class="text-brand-400 font-bold">🏠 [املاک تخصصی ملک‌آپ]</p>
+                            <p>─────────────────</p>
+                            <p><span class="text-amber-400">🔹 نوع ملک:</span> آپارتمان تک‌واحدی</p>
+                            <p><span class="text-amber-400">📐 متراژ:</span> ۱۴۵ متر مربع (۳ خواب)</p>
+                            <p><span class="text-amber-400">📍 محدوده:</span> خیابان اصلی - طبقه ۳</p>
+                            <p><span class="text-amber-400">✨ امکانات:</span> آسانسور، پارکینگ، انباری، بالکن</p>
+                            <p><span class="text-emerald-400">💰 رهن:</span> ۲۰۰,۰۰۰,۰۰۰ تومان</p>
+                            <p><span class="text-emerald-400">💵 اجاره:</span> ۱۲,۰۰۰,۰۰۰ تومان</p>
+                            <p>─────────────────</p>
+                            <p class="text-sky-400">📞 جهت هماهنگی و بازدید تماس بگیرید</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final Download Banner & QR Code -->
+    <section class="py-16 bg-gradient-to-br from-brand-900 via-indigo-950 to-slate-950 text-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                
+                <div class="md:col-span-8 space-y-4 text-center md:text-right">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">
+                        آماده‌اید سرعت کار خود را چند برابر کنید؟
+                    </h2>
+                    <p class="text-indigo-200 text-base max-w-xl">
+                        همین حالا اپلیکیشن ملک‌آپ را دانلود کنید و فایل‌های ملکی خود را هوشمندانه و با بالاترین نظم مدیریت کنید.
+                    </p>
+                    <div class="pt-4 flex flex-wrap items-center justify-center md:justify-start gap-4">
+                        <a href="https://github.com/MostafaModaberi/melkup-releases/releases/download/v1.0.6/MelkUp.-.v1.0.6.apk" 
+                           target="_blank" 
+                           download="MelkUp.v1.0.6.apk" 
+                           class="px-8 py-4 rounded-2xl bg-gradient-to-r from-brand-500 to-violetBrand-600 text-white font-black text-base shadow-lg hover:shadow-glow-indigo hover:-translate-y-1 transition-all duration-300">
+                            دانلود مستقیم برنامه (v1.0.6)
+                        </a>
+                        <!-- لینک سایت تبدیل فایل به اکسل را در href زیر قرار دهید -->
+                        <a href="#" target="_blank" class="px-6 py-4 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md transition-all flex items-center gap-2">
+                            <svg class="w-5 h-5 text-emerald-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            ورود به سامانه تبدیل به اکسل
+                        </a>
+                        <a href="https://t.me/melkup_app" target="_blank" class="px-6 py-4 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm backdrop-blur-md transition-all">
+                            ورود به کانال تلگرام
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Updated QR Code Box -->
+                <div class="md:col-span-4 flex justify-center">
+                    <div class="bg-white p-6 rounded-3xl shadow-2xl text-center text-slate-800">
+                        <img src="https://kitset.ir/code/qr-create?url=https%3A%2F%2Fgithub.com%2FMostafaModaberi%2Fmelkup-releases%2Freleases%2Ftag%2Fv1.0.6&size=800&color=black&type=url" 
+                             alt="QR Code دانلود ملک‌آپ" 
+                             class="w-36 h-36 mx-auto rounded-xl object-contain">
+                        <p class="text-xs font-bold text-slate-700 mt-3">اسکن کنید و با گوشی دانلود کنید</p>
+                        <p class="text-[10px] text-slate-500 mt-0.5">پشتیبانی از اندروید ۵ به بالا</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center space-y-3 mb-12">
+                <span class="px-3.5 py-1 rounded-full bg-brand-50 text-brand-600 text-xs font-bold">پاسخ به سوالات شما</span>
+                <h2 class="text-3xl font-extrabold text-slate-900">سوالات متداول درباره ملک‌آپ</h2>
+            </div>
+
+            <div class="space-y-4">
+                <template x-for="(faq, idx) in faqs" :key="idx">
+                    <div class="border border-slate-200 rounded-2xl overflow-hidden transition-all duration-200">
+                        <button @click="faq.open = !faq.open" class="w-full text-right p-5 font-bold text-slate-800 flex items-center justify-between hover:bg-slate-50">
+                            <span x-text="faq.q"></span>
+                            <span class="text-brand-600 font-bold transition-transform duration-200" :class="faq.open ? 'rotate-180' : ''">↓</span>
+                        </button>
+                        <div x-show="faq.open" x-transition x-cloak class="p-5 pt-0 text-sm text-slate-600 leading-relaxed border-t border-slate-100 bg-slate-50/50" x-text="faq.a">
+                        </div>
+                    </div>
+                </template>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Contact & Footer -->
+    <footer id="contact" class="bg-slate-900 text-slate-400 py-16 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-slate-800">
+                
+                <!-- Col 1: App Info & New Logo -->
+                <div class="md:col-span-5 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <img src="https://i.ibb.co/8Lm8KC1W/Asset-3object.png" alt="لوگو ملک‌آپ" class="w-10 h-10 object-contain">
+                        <span class="text-2xl font-black text-white">ملک‌آپ</span>
+                    </div>
+                    <p class="text-sm leading-relaxed text-slate-400 max-w-sm">
+                        ملک‌آپ، دستیار هوشمند مشاوران املاک. طراحی‌شده برای افزایش سرعت، دقت و نظم در مدیریت فایل‌های ملکی و بهبود بهره‌وری در آژانس‌های املاک.
+                    </p>
+                </div>
+
+                <!-- Col 2: Quick Links -->
+                <div class="md:col-span-3 space-y-3">
+                    <h4 class="text-white font-bold text-base mb-2">لینک‌های سریع</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#features" class="hover:text-brand-400 transition-colors">امکانات اصلی</a></li>
+                        <li><a href="#screenshots" class="hover:text-brand-400 transition-colors">تصاویر محیط برنامه</a></li>
+                        <li><a href="#faq" class="hover:text-brand-400 transition-colors">سوالات متداول</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Contact Info -->
+                <div class="md:col-span-4 space-y-3">
+                    <h4 class="text-white font-bold text-base mb-2">ارتباط با پشتیبانی و توسعه‌دهنده</h4>
+                    <div class="space-y-2 text-sm">
+                        <p class="flex items-center gap-2">
+                            <span>👤 توسعه‌دهنده:</span>
+                            <span class="text-white font-semibold">مصطفی مدبری</span>
+                        </p>
+                        <p class="flex items-center gap-2">
+                            <span>📧 ایمیل پشتیبانی:</span>
+                            <a href="mailto:mostafamodaberi@gmail.com" class="text-brand-400 hover:underline font-mono">mostafamodaberi@gmail.com</a>
+                        </p>
+                        <p class="flex items-center gap-2">
+                            <span>📱 تلگرام:</span>
+                            <a href="https://t.me/melkup_app" target="_blank" class="text-sky-400 hover:underline font-mono">t.me/melkup_app</a>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Copyright & Developer Credit -->
+            <div class="pt-8 text-center text-xs text-slate-500 space-y-1">
+                <div>© تمامی حقوق این وب‌سایت و نرم‌افزار ملک‌آپ محفوظ است.</div>
+                <div class="text-slate-400 font-medium">طراحی و توسعه توسط <span class="text-brand-400 font-bold">مصطفی مدبری</span></div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Alpine JS Logic -->
+    <script>
+        function appState() {
+            return {
+                mobileMenuOpen: false,
+                downloadLink: 'https://github.com/MostafaModaberi/melkup-releases/releases/download/v1.0.6/MelkUp.-.v1.0.6.apk',
+                telegramLink: 'https://t.me/melkup_app',
+                email: 'mostafamodaberi@gmail.com',
+                
+                currentScreenshotIndex: 0,
+                autoPlayTimer: null,
+                lightboxOpen: false,
+                lightboxIndex: 0,
+
+                screenshots: [
+                    { title: 'اپلیکیشن ملک‌آپ', url: 'https://i.ibb.co/t9pNKWf/01-07.jpg' },
+                    { title: 'جست‌وجوی سریع بین فایل‌ها', url: 'https://i.ibb.co/S4tTm5k2/01-06.jpg' },
+                    { title: 'ثبت تمامی اطلاعات', url: 'https://i.ibb.co/VpWh4C0B/01-05.jpg' },
+                    { title: 'خروجی چشم‌نواز', url: 'https://i.ibb.co/B2cHTzx7/01-04.jpg' },
+                    { title: 'شخصی‌سازی گسترده', url: 'https://i.ibb.co/NQf0rjQ/01-03.jpg' },
+                    { title: 'ساخت استوری با هوش‌مصنوعی', url: 'https://i.ibb.co/DPGFwtkJ/01-02.jpg' },
+                    { title: 'صفحه اصلی و مدیریت فایل‌ها', url: 'https://i.ibb.co/V00ywLwf/01-01.jpg' }
+                ],
+
+                init() {
+                    this.startAutoPlay();
+                },
+
+                startAutoPlay() {
+                    this.stopAutoPlay();
+                    this.autoPlayTimer = setInterval(() => {
+                        this.nextScreenshot();
+                    }, 3500);
+                },
+
+                stopAutoPlay() {
+                    if (this.autoPlayTimer) {
+                        clearInterval(this.autoPlayTimer);
+                        this.autoPlayTimer = null;
+                    }
+                },
+
+                nextScreenshot() {
+                    this.currentScreenshotIndex = (this.currentScreenshotIndex + 1) % this.screenshots.length;
+                    this.scrollToIndex(this.currentScreenshotIndex);
+                },
+
+                prevScreenshot() {
+                    this.currentScreenshotIndex = (this.currentScreenshotIndex - 1 + this.screenshots.length) % this.screenshots.length;
+                    this.scrollToIndex(this.currentScreenshotIndex);
+                },
+
+                scrollToIndex(index) {
+                    this.currentScreenshotIndex = index;
+                    const container = document.getElementById('screenshots-container');
+                    if (!container) return;
+                    const card = container.children[index];
+                    if (card) {
+                        const cardOffset = card.offsetLeft - container.offsetLeft;
+                        const targetScroll = cardOffset - (container.clientWidth / 2) + (card.clientWidth / 2);
+                        container.scrollTo({ left: targetScroll, behavior: 'smooth' });
+                    }
+                },
+
+                faqs: [
+                    {
+                        q: 'چگونه لایسنس برنامه را خریداری کنم و از قیمت‌ها مطلع شوم؟',
+                        a: 'برای خرید لایسنس و استفاده نامحدود و دریافت قیمت ها به کانال تلگرام مراجعه کنید.',
+                        open: true
+                    },
+                    {
+                        q: 'آیا اپلیکیشن ملک‌آپ برای کار به اینترنت نیاز دارد؟',
+                        a: 'خیر، ملک‌آپ به گونه‌ای بهینه طراحی شده که بدون نیاز به اینترنت بتوانید تمامی فایل‌های خود را ثبت، ویرایش، مدیریت و جستجو کنید.',
+                        open: false
+                    },
+                    {
+                        q: 'آیا امکان ایجاد تغییر در قالب متون آگهی وجود دارد؟',
+                        a: 'بله، شما می‌توانید تمام ایموجی‌ها، سربرگ، تهبرگ، جداکننده‌های فایل‌ها و شیوه نمایش قیمت‌ها را دقیقاً مطابق برند آژانس املاک خود شخصی‌سازی کنید.',
+                        open: false
+                    },
+                    {
+                        q: 'چگونه از فایل‌هایم نسخه پشتیبان تهیه کنم؟',
+                        a: 'برنامه به صورت خودکار از اطلاعات شما پشتیبان‌گیری انجام می‌دهد تا در صورت بروز هرگونه مشکل برای دستگاه، فایل‌های شما محفوظ بماند.',
+                        open: false
+                    },
+                    {
+                        q: 'چه نوع املاکی در این اپلیکیشن پشتیبانی می‌شوند؟',
+                        a: 'شما می‌توانید فایل‌های آپارتمانی، ویلایی، باغ‌ویلا و املاک تجاری را به صورت فروش، رهن کامل، اجاره کامل یا ترکیبی ثبت کنید.',
+                        open: false
+                    }
+                ],
+
+                scrollScreenshots(direction) {
+                    const container = document.getElementById('screenshots-container');
+                    const amount = 300;
+                    if (direction === 'left') {
+                        container.scrollBy({ left: -amount, behavior: 'smooth' });
+                    } else {
+                        container.scrollBy({ left: amount, behavior: 'smooth' });
+                    }
+                },
+
+                openLightbox(index) {
+                    this.lightboxIndex = index;
+                    this.lightboxOpen = true;
+                },
+
+                nextLightbox() {
+                    this.lightboxIndex = (this.lightboxIndex + 1) % this.screenshots.length;
+                },
+
+                prevLightbox() {
+                    this.lightboxIndex = (this.lightboxIndex - 1 + this.screenshots.length) % this.screenshots.length;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
